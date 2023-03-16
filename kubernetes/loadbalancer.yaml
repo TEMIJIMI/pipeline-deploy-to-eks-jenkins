@@ -1,0 +1,42 @@
+apiversion: apps/v1
+kind: deployment
+metadata:
+  name: voting-app
+spec:
+  selector:
+    matchlabels:
+      app: voting-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: voting-app
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine
+        ports:
+          - containerport: 6379
+      - name: worker
+        image: dockersamples/examplevotingapp_worker
+        ports:
+          - containerport: 80
+        env:
+          - name: REDIS
+            value: redis
+    imagePullSecrets:
+      - name: regcred
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: voting-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: voting-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
