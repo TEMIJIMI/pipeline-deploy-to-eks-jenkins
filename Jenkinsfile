@@ -22,16 +22,16 @@ pipeline {
                 script {
                     dir('kubernetes') {
                         sh "aws eks update-kubeconfig --name myapp-eks-cluster"
-                        // sh "kubectl apply -f namespace.yaml"
-                        // sh "kubectl apply -f db-deployment.yaml"
-                        // sh "kubectl apply -f db-service.yaml"
-                        // sh "kubectl apply -f redis-deployment.yaml"
-                        // sh "kubectl apply -f redis-service.yaml"
-                        // sh "kubectl apply -f result-deployment.yaml"
-                        // sh "kubectl apply -f result-service.yaml"
-                        // sh "kubectl apply -f vote-deployment.yaml"
-                        // sh "kubectl apply -f vote-service.yaml"
-                        // sh "kubectl apply -f worker-deployment.yaml"
+                        sh "kubectl apply -f namespace.yaml"
+                        sh "kubectl apply -f db-deployment.yaml"
+                        sh "kubectl apply -f db-service.yaml"
+                        sh "kubectl apply -f redis-deployment.yaml"
+                        sh "kubectl apply -f redis-service.yaml"
+                        sh "kubectl apply -f result-deployment.yaml"
+                        sh "kubectl apply -f result-service.yaml"
+                        sh "kubectl apply -f vote-deployment.yaml"
+                        sh "kubectl apply -f vote-service.yaml"
+                        sh "kubectl apply -f worker-deployment.yaml"
                         sh "kubectl apply -f socks-app.yaml"
                         
                     }
