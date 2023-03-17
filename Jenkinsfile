@@ -32,7 +32,7 @@ pipeline {
                         sh "kubectl apply -f vote-deployment.yaml"
                         sh "kubectl apply -f vote-service.yaml"
                         sh "kubectl apply -f worker-deployment.yaml"
-                        sh "kubectl apply -f complete-deployment.yaml"
+                        sh "kubectl apply -f socks-app.yaml"
                         
                     }
                 }
