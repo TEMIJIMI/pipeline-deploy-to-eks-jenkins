@@ -31,10 +31,10 @@ pipeline {
                         sh "kubectl apply -f result-service.yaml"
                         sh "kubectl apply -f vote-deployment.yaml"
                         sh "kubectl apply -f vote-service.yaml"
-                        sh "kubectl apply -f worker-deployment.yaml"
-                        sh "kubectl apply -f monitoring.yaml"
+                        sh "kubectl apply -f worker-deployment.yaml" 
+                    }
+                    dir('kubernetes,socks-app') {
                         sh "kubectl apply -f socks-app.yaml"
-                        
                     }
                 }
             }
