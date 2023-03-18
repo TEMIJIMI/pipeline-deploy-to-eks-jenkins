@@ -1,0 +1,38 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: votingapp-monitor
+  namespace: voting-app
+  labels:
+    app: voting-app
+spec:
+  selector:
+    matchLabels:
+      app: voting-app
+  endpoints:
+  - port: 80
+    interval: 30s
+    path: /metrics
+    scheme: http
+    tlsConfig:
+      insecureSkipVerify: true
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: votingapp-alerts
+  namespace: voting-app
+  labels:
+    app: voting-app
+spec:
+  groups:
+  - name: votingapp-alert-rules
+    rules:
+    - alert: HighErrorRate
+      expr: rate(http_requests_total{job="<app-name>"}[5m]) > 0.5
+      for: 1m
+      labels:
+        severity: critical
+      annotations:
+        summary: High error rate on {{$labels.service}}
+        description: Error rate is {{ $value }} per second. This is above the normal threshold.
