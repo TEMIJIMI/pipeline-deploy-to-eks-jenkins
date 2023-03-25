@@ -40,15 +40,15 @@ pipeline {
             }
         }
     }
-    stages {
-        stage("Destroy EKS Cluster") {
-            steps {
-                script {
-                    dir('terraform') {
-                        sh "terraform destroy -auto-approve"
-                    }
-                }
-            }
-        }
-    }
+    // stages {
+    //     stage("Destroy EKS Cluster") {
+    //         steps {
+    //             script {
+    //                 dir('terraform') {
+    //                     sh "terraform destroy -auto-approve"
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 }
